@@ -14,7 +14,7 @@ const HeaderComponent = styled.header`
   flex-direction: column;
   align-items: center;
 `;
-const Title = styled.h1`
+const Title = styled.h2`
   font-weight: 500;
   width: max-content;
   color: white;
@@ -35,7 +35,7 @@ const Header = () => {
     useEffect(() => {
         // @ts-ignore
         dispatch(getAddressByIP(ipAddress));
-    }, [dispatch]);
+    }, [dispatch, ipAddress]);
 
     return (
         <HeaderComponent>

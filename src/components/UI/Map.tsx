@@ -1,7 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import React from 'react';
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import { useSelector } from 'react-redux';
+import markerIcon from '../../assets/icons/marker-icon.png';
+import L from 'leaflet';
 import styled from 'styled-components';
+import 'leaflet/dist/leaflet.css';
 
 const MapDiv = styled.div`
   width: 100%;
@@ -11,30 +14,35 @@ const MapDiv = styled.div`
 
 const Map = () => {
     const address = useSelector((state: any) => state.address.value);
-    const loading = useSelector((state: any) => state.address.loading);
-    const [markerPosition, setMarkerPosition] = useState<[number, number]>([0, 0]);
-
-    useEffect(() => {
-        console.log(address)
-        if (address.success) {
-            setMarkerPosition([address.latitude, address.longitude]);
-            console.log(markerPosition)
-        }
-    }, [address]);
+    function MyComponent() {
+        const map = useMap()
+        map.flyTo([address.latitude, address.longitude], map.getZoom())
+        return null
+    }
 
     return (
         <MapDiv>
             <MapContainer
-                center={markerPosition}
+                center={[address.latitude, address.longitude]}
                 scrollWheelZoom={false}
                 zoom={13}
-                style={{ height: '60vh' }}
+                style={{ height: '65vh', position: 'relative' }}
             >
+                <MyComponent/>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {loading && <Marker position={markerPosition}/>}
+                <Marker
+                    position={[address.latitude, address.longitude]}
+                    icon={L.icon({
+                        iconUrl: markerIcon,
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        tooltipAnchor: [16, -28],
+                    })}
+                />
             </MapContainer>
         </MapDiv>
     );

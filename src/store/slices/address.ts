@@ -8,7 +8,10 @@ interface addressState {
 }
 
 const initialState: addressState = {
-    value: {},
+    value: {
+        latitude: 0,
+        longitude: 0,
+    },
     loading: false,
     error: null,
 };

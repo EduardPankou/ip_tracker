@@ -9,6 +9,8 @@ interface InformationBlockProps {
     address: {
         success: boolean;
         city: string;
+        country: string;
+        postal: string;
         ip: string;
         connection: {
             isp: string
@@ -51,7 +53,8 @@ const InformationBlock: React.FC<InformationBlockProps> = ({ address }) => {
             </ItemOfBlock>
             <ItemOfBlock margin={2}>
                 <TitleOfItem>LOCATION</TitleOfItem>
-                <TextOfItem>{address.city}</TextOfItem>
+                <TextOfItem>{address.country}, {address.city}</TextOfItem>
+                <TextOfItem>{address.postal}</TextOfItem>
             </ItemOfBlock>
             <ItemOfBlock margin={0}>
                 <TitleOfItem>ISP</TitleOfItem>
