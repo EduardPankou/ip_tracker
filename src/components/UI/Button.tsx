@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ButtonProps } from '../../types/buttonType'
 
 const ButtonComponent = styled.button`
   padding: 10px;
@@ -15,13 +16,6 @@ const ButtonComponent = styled.button`
     transition: .5s all;
   }
 `
-
-
-interface ButtonProps {
-    onSubmit: any;
-    name: string,
-    type: 'button' | 'submit' | 'reset' | undefined
-}
 
 const Button: React.FC<ButtonProps> = ({ onSubmit, name, type }) => {
     return (

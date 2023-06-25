@@ -2,33 +2,32 @@ import React from 'react';
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import { useSelector } from 'react-redux';
 import markerIcon from '../../assets/icons/marker-icon.png';
+import { Container } from '../../styles/Map'
 import L from 'leaflet';
-import styled from 'styled-components';
 import 'leaflet/dist/leaflet.css';
-
-const MapDiv = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-`;
 
 const Map = () => {
     const address = useSelector((state: any) => state.address.value);
-    function MyComponent() {
+    function FlyToComponent() {
         const map = useMap()
-        map.flyTo([address.latitude, address.longitude], map.getZoom())
+        console.log(address)
+        if (address.success) {
+            map.flyTo([address.latitude, address.longitude], map.getZoom())
+        } else {
+            alert('Sorry, your IP incorrect')
+        }
         return null
     }
 
     return (
-        <MapDiv>
+        <Container>
             <MapContainer
                 center={[address.latitude, address.longitude]}
                 scrollWheelZoom={false}
                 zoom={13}
-                style={{ height: '65vh', position: 'relative' }}
+                style={{ height: '65vh' }}
             >
-                <MyComponent/>
+                <FlyToComponent/>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -44,7 +43,7 @@ const Map = () => {
                     })}
                 />
             </MapContainer>
-        </MapDiv>
+        </Container>
     );
 };
 

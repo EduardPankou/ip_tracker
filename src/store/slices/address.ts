@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import { addressType } from '../../types/addressType'
 import axios from 'axios';
 
 interface addressState {
-    value: any;
+    value: addressType;
     loading: boolean;
     error: string | undefined | null;
 }
@@ -11,6 +12,14 @@ const initialState: addressState = {
     value: {
         latitude: 0,
         longitude: 0,
+        city: '',
+        connection: {
+            isp: '',
+        },
+        country: '',
+        ip: '',
+        postal: '',
+        success: true
     },
     loading: false,
     error: null,
@@ -37,6 +46,10 @@ const addressSlice = createSlice({
             })
             .addCase(getAddressByIP.fulfilled, (state, action) => {
                 state.loading = false;
+                if (!action.payload.success) {
+                    action.payload.latitude = 0
+                    action.payload.longitude = 0
+                }
                 state.value = action.payload;
             })
             .addCase(getAddressByIP.rejected, (state, action) => {

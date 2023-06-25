@@ -1,32 +1,23 @@
 import React, {useEffect, useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAddressByIP } from '../store/slices/address';
+import { addressType } from '../types/addressType'
 import Input from '../components/UI/Input'
 import Button from '../components/UI/Button'
 import InformationBlock from '../components/InformationBlock'
-import { useSelector, useDispatch } from 'react-redux';
-import { getAddressByIP } from '../store/slices/address';
-import styled from 'styled-components';
+import { Container, Title, Search } from '../styles/Header'
 
-const HeaderComponent = styled.header`
-  width: 100%;
-  height: 20rem;
-  background: #7b8ce3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-const Title = styled.h2`
-  font-weight: 500;
-  width: max-content;
-  color: white;
-`
-const Search = styled.div`
-  display: flex;
-`
+
 
 const Header = () => {
     const [ipAddress, setIPAddress] = useState('');
-    const address = useSelector((state: any) => state.address.value);
+    const address = useSelector((state: {
+        address: {
+            value: addressType
+        }
+    }) => state.address.value);
     const dispatch = useDispatch();
+
     const handleSubmit = () => {
         // @ts-ignore
         dispatch(getAddressByIP(ipAddress));
@@ -35,17 +26,25 @@ const Header = () => {
     useEffect(() => {
         // @ts-ignore
         dispatch(getAddressByIP(ipAddress));
-    }, [dispatch, ipAddress]);
+    }, [dispatch]);
 
     return (
-        <HeaderComponent>
+        <Container>
             <Title>IP ADDRESS TRACKER</Title>
             <Search>
-                <Input value={ipAddress} placeholder={'Введите IP адрес'} onChange={setIPAddress}/>
-                <Button name={'НАЙТИ'} type={'button'} onSubmit={handleSubmit}/>
+                <Input
+                    value={ipAddress}
+                    placeholder={'ENTER IP ADDRESS'}
+                    onChange={setIPAddress}
+                />
+                <Button
+                    name={'SEARCH'}
+                    type={'button'}
+                    onSubmit={handleSubmit}
+                />
             </Search>
             {address.success && <InformationBlock address={address} />}
-        </HeaderComponent>
+        </Container>
     );
 }
 

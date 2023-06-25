@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { InputProps } from '../../types/inputType'
 
 const InputComponent = styled.input`
   padding: 10px;
@@ -8,13 +9,6 @@ const InputComponent = styled.input`
   font-size: 16px;
   outline: none;
 `;
-
-
-interface InputProps {
-    value: string;
-    placeholder: string;
-    onChange: (value: string) => void;
-}
 
 const Input: React.FC<InputProps> = ({ value, placeholder, onChange }) => {
     return (
