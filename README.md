@@ -1,19 +1,30 @@
-## Available Scripts
+# IP Tracker
 
-In the project directory, you can run:
+This project is a web application for tracking IP addresses. It uses React, Redux, Leaflet, and styled-components.
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone the repository to your local machine:
+git clone https://github.com/EduardPankou/ip_tracker.git
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. Navigate to the project directory:
+cd ip-tracker
 
-### `npm run build`
+3. Install the dependencies using npm:
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#Usage
+1. Start the development server:
+npm start
+2. Open your web browser and visit http://localhost:3000 to view the application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#Build
+To build the production-ready optimized version of the application, run the following command:
+npm run build
+
+#Additional Notes
+The application uses Leaflet for displaying maps. Ensure that you have an internet connection for the maps to load properly.
+The IP tracking functionality relies on an external API. Make sure you have a stable internet connection for accurate results.
+
+#License
+This project is licensed under the MIT License. See the LICENSE file for details.
