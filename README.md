@@ -13,18 +13,18 @@ cd ip-tracker
 3. Install the dependencies using npm:
 npm install
 
-#Usage
+##Usage
 1. Start the development server:
 npm start
 2. Open your web browser and visit http://localhost:3000 to view the application.
 
-#Build
+##Build
 To build the production-ready optimized version of the application, run the following command:
 npm run build
 
-#Additional Notes
+##Additional Notes
 The application uses Leaflet for displaying maps. Ensure that you have an internet connection for the maps to load properly.
 The IP tracking functionality relies on an external API. Make sure you have a stable internet connection for accurate results.
 
-#License
+##License
 This project is licensed under the MIT License. See the LICENSE file for details.
